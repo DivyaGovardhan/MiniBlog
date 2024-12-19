@@ -1,0 +1,27 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+    {% if request.user.is_authenticated %}
+        {% if latest_question_list %}
+            <div class="list-group">
+                {% for question in latest_question_list %}
+                    {% if question.was_published_recently %}
+                        <p>Пост</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info mt-3" role="alert">
+                <p class="h2">Нет постов!</p>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-warning mt-3" role="alert">
+            <p class="h2">Войдите, чтобы увидеть посты</p>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
